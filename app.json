@@ -1,23 +1,27 @@
 {
   "expo": {
-    "name": "kounga-project",
+    "name": "Kounga App",
     "slug": "kounga-project",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/undraw_fast_loading_0lbh.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.geoffrey.mak",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.geoffrey.mak",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
