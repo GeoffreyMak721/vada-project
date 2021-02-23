@@ -19,6 +19,7 @@ function GlobalStateProvider({ children }) {
 
   useEffect(() => {
     initializeData();
+    console.log("initialize app");
   }, []);
 
   return (

@@ -12,7 +12,7 @@ const SettingScreen = (props) => {
   const { navigation, route } = props;
   const [openColorDialog, setOpenColorDialog] = useState(false);
   const [openSizeDialog, setOpenSizeDialog] = useState(false);
-  const { dark } = useTheme();
+  const { dark, colors } = useTheme();
   const { toggleTheme } = useGlobalPrefereces();
 
   return (
@@ -22,7 +22,9 @@ const SettingScreen = (props) => {
         <Appbar.Content title="Paramètres" />
       </Appbar.Header>
 
-      <Surface style={styles.surface}>
+      <Surface
+        style={[styles.surface, { backgroundColor: colors.background2 }]}
+      >
         <List.Section>
           <List.Subheader>Theme</List.Subheader>
           <List.Item

@@ -2,11 +2,14 @@ import React from "react";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import LyricsDetailScreen from "../screens/LyricsDetailScreen";
-import FavorisScreen from "../screens/FavorisScreen";
-import LyricsScreen from "../screens/LyricsScreen";
 import SettingScreen from "../screens/SettingScreen";
 import AboutScreen from "../screens/AboutScreen";
+import HomeScreen from "../screens/HomeScreen";
+import MembersScreen from "../screens/MembersScreen";
+import AdminScreen from "../screens/AdminScreen";
+import TransactionScreen from "../screens/TransactionScreen";
+import AccountScreen from "../screens/AccountScreen";
+import ReportScreen from "../screens/ReportScreen";
 
 import DrawerContent from "../components/DrawerContent";
 
@@ -16,26 +19,43 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen
-        name="Lyrics"
+        name="Home"
         options={{
           headerShown: false,
         }}
-        component={LyricsScreen}
-      />
-      <Drawer.Screen
-        name="Favoris"
-        options={{
-          headerShown: false,
-        }}
-        component={FavorisScreen}
+        component={HomeScreen}
       />
 
       <Drawer.Screen
-        name="LyricsDetail"
+        name="Report"
         options={{
           headerShown: false,
         }}
-        component={LyricsDetailScreen}
+        component={ReportScreen}
+      />
+
+      <Drawer.Screen
+        name="Account"
+        options={{
+          headerShown: false,
+        }}
+        component={AccountScreen}
+      />
+
+      <Drawer.Screen
+        name="Members"
+        options={{
+          headerShown: false,
+        }}
+        component={MembersScreen}
+      />
+
+      <Drawer.Screen
+        name="Admin"
+        options={{
+          headerShown: false,
+        }}
+        component={AdminScreen}
       />
 
       <Drawer.Screen
@@ -52,6 +72,14 @@ const DrawerNavigator = () => {
           headerShown: false,
         }}
         component={AboutScreen}
+      />
+
+      <Drawer.Screen
+        name="Transaction"
+        options={{
+          headerShown: false,
+        }}
+        component={TransactionScreen}
       />
     </Drawer.Navigator>
   );

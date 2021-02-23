@@ -15,19 +15,19 @@ import { DEFAULT_FONT_SIZE } from "./const";
 const fonts = configureFonts({
   default: {
     regular: {
-      fontFamily: "itim-mono",
+      fontFamily: "quicksand-mono",
       fontWeight: "normal",
     },
     medium: {
-      fontFamily: "itim-mono",
+      fontFamily: "quicksand-mono",
       fontWeight: "normal",
     },
     light: {
-      fontFamily: "itim-mono",
+      fontFamily: "quicksand-mono",
       fontWeight: "normal",
     },
     thin: {
-      fontFamily: "itim-mono",
+      fontFamily: "quicksand-mono",
       fontWeight: "normal",
     },
   },
@@ -111,8 +111,11 @@ export const getTheme = (themeName, primaryColor) => {
     colors: {
       ...NavigationDefaultTheme.colors,
       ...PaperDefaultTheme.colors,
-      primary: !!primaryColor ? primaryColor : PaperDefaultTheme.colors.primary,
+      primary: !!primaryColor ? primaryColor : PaperDefaultTheme.colors.error,
       background: "#ffffff",
+      background2: Colors.grey100,
+      row1: Colors.grey200,
+      row2: Colors.white,
       text: "#333333",
     },
     fonts,
@@ -125,6 +128,9 @@ export const getTheme = (themeName, primaryColor) => {
       ...NavigationDarkTheme.colors,
       ...PaperDarkTheme.colors,
       background: "#333333",
+      background2: Colors.grey800,
+      row1: Colors.grey400,
+      row2: Colors.grey600,
       text: "#ffffff",
     },
     fonts,

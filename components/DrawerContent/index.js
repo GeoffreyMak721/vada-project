@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import {
   useTheme,
@@ -9,78 +9,144 @@ import {
   Text,
   TouchableRipple,
   Switch,
+  Divider,
+  Paragraph,
 } from "react-native-paper";
+
+import { useSelector } from "react-redux";
 
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 
 // import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { useGlobalPrefereces } from "../../contexts/GlobalState";
-
+import getAttribut from "../../utils/getAdminAttribut";
 import ColorsDialog from "../ColorsDialog";
 
 export default function DrawerContent(props) {
   const paperTheme = useTheme();
+  const admin = useSelector((state) => state.admin.data);
   const { toggleTheme } = useGlobalPrefereces();
   const [openColorDialog, setOpenColorDialog] = useState(false);
 
   return (
     <>
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: paperTheme.colors.primary }}>
         <DrawerContentScrollView {...props}>
           <View style={styles.drawerContent}>
             <View style={styles.userInfoSection}>
               <View style={{ flexDirection: "row", marginTop: 15 }}>
                 <Avatar.Icon
-                  // source={{
-                  //   uri:
-                  //     "https://api.adorable.io/avatars/50/abott@adorable.png",
-                  // }}
-                  icon="music"
-                  size={50}
+                  style={{ backgroundColor: "#fff" }}
+                  icon="account-outline"
+                  size={60}
                 />
                 <View style={{ marginLeft: 15, flexDirection: "column" }}>
-                  <Title style={styles.title}>Kunga App</Title>
-                  <Caption style={styles.caption}>version: 1.0</Caption>
+                  <Title style={styles.title}>{!!admin && admin.nom}</Title>
+                  <Caption style={styles.caption}>
+                    {!!admin && getAttribut(admin.attribut)}
+                  </Caption>
                 </View>
               </View>
 
-              {/* <View style={styles.row}>
-              <View style={styles.section}>
-                <Paragraph style={[styles.paragraph, styles.caption]}>
-                  80
-                </Paragraph>
-                <Caption style={styles.caption}>Following</Caption>
+              <View style={styles.row}>
+                <View style={styles.section}>
+                  <Paragraph style={[styles.paragraph, styles.caption]}>
+                    80
+                  </Paragraph>
+                  <Caption style={styles.caption}>Membre actifs</Caption>
+                </View>
+                <View style={styles.section}>
+                  <Paragraph style={[styles.paragraph, styles.caption]}>
+                    100
+                  </Paragraph>
+                  <Caption style={styles.caption}>Membres</Caption>
+                </View>
               </View>
-              <View style={styles.section}>
-                <Paragraph style={[styles.paragraph, styles.caption]}>
-                  100
-                </Paragraph>
-                <Caption style={styles.caption}>Followers</Caption>
-              </View>
-            </View> */}
             </View>
 
-            <Drawer.Section style={styles.drawerSection}>
+            <Drawer.Section
+              title="Menu"
+              theme={{
+                ...paperTheme,
+                colors: { ...paperTheme.colors, text: "#fff" },
+              }}
+              style={styles.drawerSection}
+            >
               <Drawer.Item
                 icon="home-outline"
                 label="Accueil"
-                onPress={() => props.navigation.navigate("Lyrics")}
-              />
-              <Drawer.Item
-                icon="star-outline"
-                label="Favoris"
-                onPress={() => props.navigation.navigate("Favoris")}
+                theme={{
+                  ...paperTheme,
+                  colors: { ...paperTheme.colors, text: "#fff" },
+                }}
+                onPress={() => props.navigation.navigate("Home")}
               />
 
               <Drawer.Item
-                icon="settings-outline"
-                label="Paramètres"
-                onPress={() => props.navigation.navigate("Setting")}
+                icon="account-circle-outline"
+                label="Mon Compte"
+                theme={{
+                  ...paperTheme,
+                  colors: { ...paperTheme.colors, text: "#fff" },
+                }}
+                onPress={() => props.navigation.navigate("Account")}
+              />
+              <Drawer.Item
+                theme={{
+                  ...paperTheme,
+                  colors: { ...paperTheme.colors, text: "#fff" },
+                }}
+                icon="account-group-outline"
+                label="Gestion Membres"
+                onPress={() => props.navigation.navigate("Members")}
+              />
+
+              {!!admin && admin.attribut === "A1" && (
+                <Drawer.Item
+                  theme={{
+                    ...paperTheme,
+                    colors: { ...paperTheme.colors, text: "#fff" },
+                  }}
+                  icon="shield-account-outline"
+                  label="Gestion Administrateurs"
+                  onPress={() => {}}
+                />
+              )}
+
+              {!!admin && (admin.attribut === "A1" || admin.attribut === "A2") && (
+                <Drawer.Item
+                  theme={{
+                    ...paperTheme,
+                    colors: { ...paperTheme.colors, text: "#fff" },
+                  }}
+                  icon="file-document-box"
+                  label="Rapports"
+                  onPress={() => {}}
+                />
+              )}
+              <Drawer.Item
+                theme={{
+                  ...paperTheme,
+                  colors: { ...paperTheme.colors, text: "#fff" },
+                }}
+                icon="bank-transfer"
+                label="Transactions"
+                onPress={() => {}}
               />
             </Drawer.Section>
-            <Drawer.Section title="Preferences">
+            <Drawer.Section
+              title="Preferences"
+              theme={{
+                ...paperTheme,
+                colors: { ...paperTheme.colors, text: "#fff" },
+              }}
+            >
               <Drawer.Item
+                theme={{
+                  ...paperTheme,
+                  colors: { ...paperTheme.colors, text: "#fff" },
+                }}
                 icon="palette-outline"
                 label="Couleur Principale"
                 onPress={() => setOpenColorDialog(true)}
@@ -88,7 +154,7 @@ export default function DrawerContent(props) {
 
               <TouchableRipple onPress={toggleTheme}>
                 <View style={styles.preference}>
-                  <Text>Mode Sombre</Text>
+                  <Text style={{ color: "#fff" }}>Mode Sombre</Text>
                   <View pointerEvents="none">
                     <Switch value={paperTheme.dark} />
                   </View>
@@ -99,6 +165,10 @@ export default function DrawerContent(props) {
         </DrawerContentScrollView>
         <Drawer.Section style={styles.bottomDrawerSection}>
           <Drawer.Item
+            theme={{
+              ...paperTheme,
+              colors: { ...paperTheme.colors, text: "#fff" },
+            }}
             icon="information-outline"
             label="A propos"
             onPress={() => props.navigation.navigate("About")}
@@ -124,10 +194,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 3,
     fontWeight: "bold",
+    color: "#fff",
   },
   caption: {
     fontSize: 14,
     lineHeight: 14,
+    color: "#eee",
   },
   row: {
     marginTop: 20,
